@@ -2,7 +2,7 @@ import CharacterList from "./components/CharacterList";
 
 function App() {
   return (
-    <div>
+    <div class="h-full w-full">
       <CharacterList />
     </div>
   );
