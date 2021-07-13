@@ -18,7 +18,7 @@ const CharacterList = (props) => {
   return (
     <ul
       id="lista"
-      class="grid gap-2 grid-cols-5 p-2 text-white m-auto bg-gray-600 justify-between"
+      class="grid gap-2 bg-gray-600 grid-cols-5 p-2 text-white m-auto justify-between"
     >
       {characters.map((character, idx, arr) => (
         <Character
