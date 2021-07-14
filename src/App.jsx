@@ -1,20 +1,28 @@
 import CharacterList from "./components/CharacterList";
 import CharacterDetail from "./components/CharacterDetail";
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
+        <Route path="/" exact>
+          <Redirect to="/characters" />
+        </Route>
+        <Route path="/characters" exact>
           <CharacterList />
         </Route>
-        <Route exact path="/characters">
-          <CharacterList />
-        </Route>
-        <Route exact path="/characters/:id">
+        <Route path="/characters/:id" exact>
           <CharacterDetail />
+        </Route>
+        <Route path="/characters/page/:page" exact>
+          <CharacterList />
         </Route>
       </Switch>
     </Router>
