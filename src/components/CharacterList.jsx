@@ -16,18 +16,21 @@ const CharacterList = (props) => {
   }, []);
 
   return (
-    <ul
-      id="lista"
-      class="grid gap-2 bg-gray-600 grid-cols-5 p-2 text-white m-auto justify-between"
-    >
-      {characters.map((character, idx, arr) => (
-        <Character
-          id={character.id}
-          image={character.image}
-          name={character.name}
-        />
-      ))}
-    </ul>
+    <div class="h-full w-full">
+      <div
+        id="lista"
+        class="grid gap-2 bg-gray-600 grid-cols-5 p-2 text-white m-auto justify-between"
+      >
+        {characters.map((character, idx, arr) => (
+          <Character
+            id={character.id}
+            image={character.image}
+            name={character.name}
+            status={character.status}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
