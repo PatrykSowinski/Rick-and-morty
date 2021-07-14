@@ -8,7 +8,7 @@ import { useParams, Link } from "react-router-dom";
 
 import CharacterDR from "./CharacterDR";
 
-const CharacterDetail = () => {
+const CharacterDetail = (props) => {
   const [character, setCharacter] = useState(undefined);
   let { id } = useParams();
 

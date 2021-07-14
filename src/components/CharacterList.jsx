@@ -26,14 +26,14 @@ const CharacterList = (props) => {
   for (let i = 1; i <= pages; i++) {
     if (i === parseInt(page)) {
       list.push(
-        <span class="inline-block bg-gray-400 text-white font-bold py-4 px-6 rounded mb-3 shadow-2xl">
+        <span class="inline-block bg-gray-500 w-18 text-white font-bold py-4 px-6 rounded shadow-2xl">
           {i}
         </span>
       );
     } else {
       list.push(
         <Link to={`/characters/page/${i}`}>
-          <span class="inline-block bg-gray-500 transition duration-1000 delay-50 hover:bg-gray-600 text-white font-bold py-4 px-6 rounded mb-3 shadow-2xl ease-in-out">
+          <span class="inline-block bg-gray-600 w-18 flex-grow transition duration-1000 delay-50 hover:bg-gray-500 text-white font-bold py-4 px-6 rounded shadow-2xl ease-in-out">
             {i}
           </span>
         </Link>
@@ -43,7 +43,9 @@ const CharacterList = (props) => {
 
   return (
     <div class="h-full w-full">
-      <div class="flex bg-gray-600 text-white justify-center">{list}</div>
+      <div class="flex p-3 flex-wrap bg-gray-600 text-white justify-center">
+        {list}
+      </div>
       <div
         id="lista"
         class="grid gap-2 bg-gray-600 grid-cols-5 p-2 text-white m-auto justify-between"
