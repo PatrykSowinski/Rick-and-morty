@@ -11,6 +11,7 @@ import CharacterDR from "./CharacterDR";
 const CharacterDetail = (props) => {
   const [character, setCharacter] = useState(undefined);
   let { id } = useParams();
+  let { page } = useParams();
 
   let url = `https://rickandmortyapi.com/api/character/${id}`;
 
@@ -34,7 +35,7 @@ const CharacterDetail = (props) => {
       class="flex flex-col bg-gray-600 p-2 text-white justify-center items-center"
     >
       <nav class="">
-        <Link to="/characters">
+        <Link to={`/characters/page/${page}`}>
           <span class="inline-block bg-gray-600 transition duration-1000 delay-50 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded mb-3 shadow-2xl ease-in-out">
             &#8592; GO BACK TO CHARACTER LIST
           </span>

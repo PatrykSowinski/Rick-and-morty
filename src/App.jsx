@@ -21,6 +21,14 @@ function App() {
         <Route path="/characters/:id" exact>
           <CharacterDetail />
         </Route>
+        {/*
+        <Route path="/characters/detail/:id" exact>
+          <CharacterDetail />
+        </Route>
+        <Route path="/characters/detail/:id/:page" exact>
+          <CharacterDetail />
+        </Route>
+        */}
         <Route path="/characters/page/:page" exact>
           <CharacterList />
         </Route>
