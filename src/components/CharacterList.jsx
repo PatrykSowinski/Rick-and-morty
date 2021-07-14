@@ -11,15 +11,34 @@ import Character from "./Character";
 const CharacterList = (props) => {
   const [characters, setCharacters] = useState([]);
   const [pages, setPages] = useState();
+  const [searchText, setSearchText] = useState();
+  const [allChars, setAllChars] = useState();
   const list = [];
   let { page } = useParams();
 
+  const handleClick = () => {
+    if (searchText === "") {
+      setCharacters(allChars);
+    }
+    if (searchText !== "") {
+      setCharacters(
+        characters.filter((character) => {
+          return character.name === searchText;
+        })
+      );
+    }
+  };
+
+  const handleChange = (event) => {
+    setSearchText(event.target.value);
+  };
   useEffect(() => {
     axios
       .get(`https://rickandmortyapi.com/api/character?page=${page}`)
       .then((res) => {
         setCharacters(res.data.results);
         setPages(res.data.info.pages);
+        setAllChars(res.data.results);
       });
   }, [page]);
 
@@ -44,7 +63,26 @@ const CharacterList = (props) => {
   return (
     <div class="h-full w-full">
       <div class="flex p-3 flex-wrap bg-gray-600 text-white justify-center">
-        {list}
+        <div class="p-8">
+          <div class="bg-white flex items-center rounded-full shadow-xl">
+            <input
+              class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
+              id="search"
+              type="text"
+              placeholder="Search"
+              onChange={handleChange}
+            ></input>
+
+            <div class="p-4">
+              <button
+                class="bg-gray-600 text-white rounded-full p-2 hover:bg-gray-500 focus:outline-none w-12 h-12 flex items-center justify-center"
+                onClick={handleClick}
+              >
+                &#128269;
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <div
         id="lista"
@@ -60,6 +98,9 @@ const CharacterList = (props) => {
             />
           </Link>
         ))}
+      </div>
+      <div class="flex p-3 flex-wrap bg-gray-600 text-white justify-center">
+        {list}
       </div>
     </div>
   );
