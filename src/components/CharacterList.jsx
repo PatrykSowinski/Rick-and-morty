@@ -12,18 +12,19 @@ const CharacterList = (props) => {
   const [characters, setCharacters] = useState([]);
   const [pages, setPages] = useState();
   const [searchText, setSearchText] = useState();
-  const [allChars, setAllChars] = useState();
+  const [allChars, setAllChars] = useState([]);
+  const [charPages, setCharPages] = useState([]);
   const list = [];
   let { page } = useParams();
 
   const handleClick = () => {
     if (searchText === "") {
-      setCharacters(allChars);
+      setCharacters(charPages);
     }
     if (searchText !== "") {
       setCharacters(
-        characters.filter((character) => {
-          return character.name === searchText;
+        allChars.filter((character) => {
+          return character.name.toUpperCase() === searchText.toUpperCase();
         })
       );
     }
@@ -38,9 +39,19 @@ const CharacterList = (props) => {
       .then((res) => {
         setCharacters(res.data.results);
         setPages(res.data.info.pages);
-        setAllChars(res.data.results);
+        setCharPages(res.data.results); //allChars powinny pobierac wszystkie chary w petli i charactery dla danej strony tez nie powinny byc zmieniane
       });
   }, [page]);
+
+  useEffect(() => {
+    for (let i = 1; i <= pages; i++) {
+      axios
+        .get(`https://rickandmortyapi.com/api/character?page=${i}`)
+        .then((res) => {
+          setAllChars((c) => c.concat(res.data.results));
+        });
+    }
+  }, [pages]);
 
   for (let i = 1; i <= pages; i++) {
     if (i === parseInt(page)) {
@@ -64,7 +75,7 @@ const CharacterList = (props) => {
     <div class="h-full w-full">
       <div class="flex p-3 flex-wrap bg-gray-600 text-white justify-center">
         <div class="p-8">
-          <div class="bg-white flex items-center rounded-full shadow-xl">
+          <div class="bg-white flex items-center rounded-full shadow-xl focus:outline-none">
             <input
               class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
               id="search"
