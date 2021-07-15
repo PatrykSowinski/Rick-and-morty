@@ -12,7 +12,7 @@ const CharacterDR = ({
   return (
     <div
       key={id}
-      className="grid grid-cols-2 gap-3 transition duration-1000 delay-50 border-solid bg-gray-600 rounded-lg
+      className="grid max-w-3xl grid-cols-2 gap-3 transition duration-1000 delay-50 border-solid bg-gray-600 rounded-lg
                shadow-2xl ease-in-out p-4 hover:bg-gray-500 font-bold"
     >
       <img src={image} alt="zdjecie" className="w-96 h-96"></img>
