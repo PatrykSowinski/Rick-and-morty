@@ -1,23 +1,28 @@
 import React from "react";
 
-import axios from "axios";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useParams, Link, useHistory } from "react-router-dom";
 
 import Character from "./Character";
 
+import useRickAndMortyAPI from "./customHook";
+
 const CharacterList = (props) => {
-  const [characters, setCharacters] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [charStatus, setCharStatus] = useState("");
   const [charGender, setCharGender] = useState("");
-  const [pages, setPages] = useState();
   const [timer, setTimer] = useState();
   const list = [];
   let history = useHistory();
   let { page } = useParams();
+
+  const [characters, pages] = useRickAndMortyAPI(
+    page,
+    searchText,
+    charGender,
+    charStatus
+  );
 
   const handleChange = (event) => {
     timer && clearTimeout(timer);
@@ -36,17 +41,6 @@ const CharacterList = (props) => {
     }
     history.push("/characters/page/1");
   };
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://rickandmortyapi.com/api/character?page=${page}&name=${searchText}&gender=${charGender}&status=${charStatus}`
-      )
-      .then((res) => {
-        setCharacters(res.data.results);
-        setPages(res.data.info.pages);
-      });
-  }, [page, searchText, charGender, charStatus]);
 
   for (let i = 1; i <= pages; i++) {
     if (i === parseInt(page)) {
