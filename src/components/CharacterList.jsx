@@ -109,7 +109,7 @@ const CharacterList = (props) => {
             Alive
           </option>
           <option className="py-1" value="dead">
-            Deadd
+            Deaddddd
           </option>
           <option className="py-1" value="unknown">
             Unknown
